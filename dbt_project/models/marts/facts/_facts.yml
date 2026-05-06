@@ -1,0 +1,91 @@
+version: 2
+
+models:
+  - name: fct_order_items
+    description: "Fact table at order item grain."
+    columns:
+      - name: order_item_sk
+        description: "Surrogate key for each order item."
+        tests:
+          - unique
+          - not_null
+
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('fct_orders')
+              field: order_id
+
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: part_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_parts')
+              field: part_id
+
+      - name: supplier_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_suppliers')
+              field: supplier_id
+
+      - name: quantity
+        tests:
+          - positive_values
+
+      - name: gross_revenue
+        tests:
+          - positive_values
+
+      - name: net_revenue
+        tests:
+          - positive_values
+
+      - name: order_date
+        tests:
+          - not_null
+          - date_not_in_future
+
+  - name: fct_orders
+    description: "Fact table at order grain."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_customers')
+              field: customer_id
+
+      - name: net_revenue
+        tests:
+          - positive_values
+
+  - name: fct_sales_daily
+    description: "Aggregated daily sales fact by geography, market segment and priority."
+    columns:
+      - name: order_date
+        tests:
+          - not_null
+          - date_not_in_future
+
+      - name: total_orders
+        tests:
+          - positive_values
+
+      - name: net_revenue
+        tests:
+          - positive_values

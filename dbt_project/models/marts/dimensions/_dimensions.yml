@@ -1,0 +1,55 @@
+version: 2
+
+models:
+  - name: dim_customers
+    description: "Customer dimension enriched with nation and region."
+    columns:
+      - name: customer_id
+        description: "Unique customer identifier."
+        tests:
+          - unique
+          - not_null
+
+      - name: market_segment
+        description: "Customer market segment."
+        tests:
+          - not_null
+
+      - name: region_name
+        description: "Customer region."
+
+  - name: dim_suppliers
+    description: "Supplier dimension enriched with nation and region."
+    columns:
+      - name: supplier_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_parts
+    description: "Product/part dimension."
+    columns:
+      - name: part_id
+        tests:
+          - unique
+          - not_null
+
+      - name: retail_price
+        tests:
+          - positive_values
+
+  - name: dim_geography
+    description: "Geography dimension with nation and region."
+    columns:
+      - name: nation_id
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_dates
+    description: "Calendar dimension generated from order and receipt dates."
+    columns:
+      - name: date_day
+        tests:
+          - unique
+          - not_null

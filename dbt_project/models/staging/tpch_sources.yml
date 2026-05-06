@@ -1,0 +1,75 @@
+version: 2
+
+sources:
+  - name: tpch
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF1
+    description: "Snowflake sample data based on TPC-H benchmark."
+
+    tables:
+      - name: CUSTOMER
+        description: "Raw customer data from TPCH."
+        columns:
+          - name: C_CUSTKEY
+            tests:
+              - unique
+              - not_null
+
+      - name: ORDERS
+        description: "Raw order data from TPCH."
+        columns:
+          - name: O_ORDERKEY
+            tests:
+              - unique
+              - not_null
+          - name: O_CUSTKEY
+            tests:
+              - not_null
+
+      - name: LINEITEM
+        description: "Raw order line items from TPCH."
+        columns:
+          - name: L_ORDERKEY
+            tests:
+              - not_null
+          - name: L_PARTKEY
+            tests:
+              - not_null
+          - name: L_SUPPKEY
+            tests:
+              - not_null
+
+      - name: PART
+        description: "Raw product/part data from TPCH."
+        columns:
+          - name: P_PARTKEY
+            tests:
+              - unique
+              - not_null
+
+      - name: SUPPLIER
+        description: "Raw supplier data from TPCH."
+        columns:
+          - name: S_SUPPKEY
+            tests:
+              - unique
+              - not_null
+
+      - name: NATION
+        description: "Raw nation data from TPCH."
+        columns:
+          - name: N_NATIONKEY
+            tests:
+              - unique
+              - not_null
+
+      - name: REGION
+        description: "Raw region data from TPCH."
+        columns:
+          - name: R_REGIONKEY
+            tests:
+              - unique
+              - not_null
+
+      - name: PARTSUPP
+        description: "Raw relationship between parts and suppliers."

@@ -1,0 +1,69 @@
+# =====================================================
+# Python
+# =====================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.python-version
+
+# Virtual environments
+venv/
+env/
+.venv/
+dbt-env/
+
+# Python build artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# =====================================================
+# dbt
+# =====================================================
+dbt_project/target/
+dbt_project/dbt_packages/
+dbt_project/logs/
+dbt_project/package-lock.yml
+
+# Keep dbt package definition
+!dbt_project/packages.yml
+
+# dbt credentials
+dbt_project/profiles.yml
+
+# =====================================================
+# Airflow / Astro
+# =====================================================
+logs/
+plugins/__pycache__/
+dags/__pycache__/
+
+# Astro local config/cache
+.astro/
+airflow.db
+webserver_config.py
+
+# =====================================================
+# Environment variables / secrets
+# =====================================================
+.env
+.env.*
+!.env.example
+
+# =====================================================
+# OS / Editor files
+# =====================================================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =====================================================
+# Misc
+# =====================================================
+*.log
+*.tmp
+*.bak
